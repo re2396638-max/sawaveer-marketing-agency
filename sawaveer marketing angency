@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sawaveer Marketing Agency - Pricing & Invoice</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Chosen Palette: Warm Earth Tones -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+        .plan-card.selected {
+            transform: scale(1.02);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border-color: #A16207;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #A16207;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .citation-link {
+            text-decoration: underline;
+            color: #059669; /* Green color for link contrast */
+        }
+    </style>
+</head>
+<body class="bg-amber-50 text-gray-800">
+
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8">
+        
+        <header class="text-center mb-10">
+            <!-- Updated Logo: Placeholder if the file is not found -->
+            <img src="6b4c073d-e63c-4fd6-9a3b-8685215cea8f.jpeg" alt="Sawaveer Marketing Agency Logo" class="w-32 h-32 mx-auto mb-4 rounded-full shadow-md object-cover" onerror="this.onerror=null;this.src='https://placehold.co/128x128/78350F/FFF?text=Sawaveer+Logo';">
+            <h1 class="text-4xl font-bold text-amber-900">Sawaveer Marketing Agency</h1>
+            <p class="text-lg text-amber-800 mt-2">Digital Campaign & Strategy Specialists</p>
+        </header>
+
+        <main>
+            <section id="plans" class="mb-12">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold text-amber-900">Choose Your Plan</h2>
+                    <p class="mt-2 text-amber-700 max-w-2xl mx-auto">
+                        We offer two distinct two-week campaign plans designed to meet your marketing needs. Select a plan below to see the details and generate a sample invoice. Prices are in Pakistani Rupees (Rs).
+                    </p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                    
+                    <div id="plan-basic" class="plan-card bg-white p-6 rounded-lg shadow-lg border-2 border-transparent transition-all duration-300 cursor-pointer">
+                        <h3 class="text-2xl font-bold text-amber-800">Basic Plan</h3>
+                        <!-- Updated Price (PKR) -->
+                        <p class="text-4xl font-bold my-4">Rs 20,000 <span class="text-lg font-normal">/ 2 weeks</span></p>
+                        <ul class="space-y-3 text-gray-600 mb-6">
+                            <li class="flex items-start">
+                                <span class="text-green-600 mr-2 mt-1">✔</span>
+                                <span><strong>Campaign Activation:</strong> We launch your ad campaign to get you started.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-green-600 mr-2 mt-1">✔</span>
+                                <span><strong>Core Strategy Application:</strong> We apply our proven marketing strategies for the duration.</span>
+                            </li>
+                        </ul>
+                        <button onclick="selectPlan('basic')" class="w-full bg-amber-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-amber-700 transition-colors">Select Basic</button>
+                    </div>
+
+                    <div id="plan-premium" class="plan-card bg-white p-6 rounded-lg shadow-lg border-2 border-transparent transition-all duration-300 cursor-pointer">
+                        <h3 class="text-2xl font-bold text-amber-800">Premium Plan</h3>
+                        <!-- Updated Price (PKR) -->
+                        <p class="text-4xl font-bold my-4">Rs 33,000 <span class="text-lg font-normal">/ 2 weeks</span></p>
+                        <ul class="space-y-3 text-gray-600 mb-6">
+                             <li class="flex items-start">
+                                <span class="text-green-600 mr-2 mt-1">✔</span>
+                                <span><strong>Daily New Ad Creation:</strong> Fresh ad creatives and campaigns launched daily for better results.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-green-600 mr-2 mt-1">✔</span>
+                                <span><strong>Audience Targeting:</strong> Meticulous analysis to determine and target the right audience.</span>
+                            </li>
+                             <li class="flex items-start">
+                                <span class="text-green-600 mr-2 mt-1">✔</span>
+                                <span><strong>Continuous Guidance & Support:</strong> We provide ongoing help and strategic advice.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-green-600 mr-2 mt-1">✔</span>
+                                <span><strong>24-Hour Service Line:</strong> Full access to our support team anytime you need it.</span>
+                            </li>
+                        </ul>
+                        <button onclick="selectPlan('premium')" class="w-full bg-amber-800 text-white font-bold py-2 px-4 rounded-lg hover:bg-amber-900 transition-colors">Select Premium</button>
+                    </div>
+                </div>
+
+                <!-- Feature 2: TTS Plan Summary -->
+                <div class="max-w-5xl mx-auto mt-6 p-4 bg-amber-200 rounded-lg shadow-inner flex flex-col sm:flex-row items-center justify-center space-y-3 sm:space-y-0 sm:space-x-4">
+                    <p class="text-amber-900 font-medium">Want to hear the summary?</p>
+                    <button id="tts-button" onclick="generateTts()" class="px-6 py-2 bg-amber-700 text-white font-semibold rounded-full hover:bg-amber-800 transition-colors flex items-center justify-center disabled:opacity-50">
+                        <span id="tts-button-text">Listen to Plan Summary ✨</span>
+                        <div id="tts-loading" class="loading-spinner ml-3 hidden"></div>
+                    </button>
+                    <audio id="tts-audio" class="hidden" controls></audio>
+                </div>
+
+            </section>
+            
+            <section id="chart-section" class="mb-12">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold text-amber-900">Price Comparison</h2>
+                    <p class="mt-2 text-amber-700">A quick look at the investment for each two-week plan (in PKR).</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-lg">
+                    <div class="chart-container">
+                        <canvas id="priceChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Feature 3: Marketing Terminology Explainer -->
+            <section id="llm-explainer" class="mb-12 max-w-4xl mx-auto">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold text-amber-900">Marketing Knowledge Base Preview ✨</h2>
+                    <p class="mt-2 text-amber-700">Get instant, grounded definitions for any complex marketing term, demonstrating our expertise.</p>
+                </div>
+                <div class="bg-white p-8 rounded-lg shadow-2xl">
+                    <h4 class="font-bold text-gray-600 mb-4">Explain a Term:</h4>
+                    <input type="text" id="term-input" placeholder="e.g., Customer Acquisition Cost, Churn Rate, Lookalike Audience" class="border p-3 rounded w-full mb-4 focus:ring-amber-500 focus:border-amber-500">
+                    
+                    <button id="explain-button" onclick="explainTerm()" class="w-full bg-amber-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-amber-700 transition-colors flex items-center justify-center disabled:opacity-50">
+                        <span id="explain-button-text">Explain Term ✨</span>
+                        <div id="explain-loading" class="loading-spinner ml-3 hidden"></div>
+                    </button>
+
+                    <div id="explainer-result" class="mt-6 p-4 bg-gray-50 border-l-4 border-amber-500 rounded text-gray-700 hidden">
+                        <!-- Result content here -->
+                    </div>
+                    <div id="explainer-sources" class="mt-2 text-sm text-gray-500 hidden">
+                        <!-- Sources content here -->
+                    </div>
+                    <div id="explainer-error" class="mt-4 text-red-600 hidden"></div>
+                </div>
+            </section>
+
+
+            <section id="invoice" class="mb-12">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold text-amber-900">Your Generated Invoice</h2>
+                    <p class="mt-2 text-amber-700">This is a preview of the invoice based on your selection. All figures are in PKR.</p>
+                </div>
+                <div class="bg-white p-8 rounded-lg shadow-2xl max-w-4xl mx-auto">
+                    <div class="flex justify-between items-start mb-8 flex-wrap">
+                        <div>
+                            <!-- Logo added to Invoice -->
+                            <img src="6b4c073d-e63c-4fd6-9a3b-8685215cea8f.jpeg" alt="Sawaveer Logo" class="w-20 h-20 mb-2 rounded-full object-cover">
+                            <h3 class="text-xl font-bold text-amber-900">Sawaveer Marketing Agency</h3>
+                            <p>Email: Sawaveernet@gmail.com</p>
+                            <p>24-Hour Service: 03194173401</p>
+                        </div>
+                        <div class="text-right mt-4 sm:mt-0">
+                            <h2 class="text-2xl font-bold uppercase text-gray-700">Invoice</h2>
+                            <p><strong>Date:</strong> <span id="invoice-date"></span></p>
+                            <p><strong>Due Date:</strong> <span id="invoice-due-date"></span></p>
+                        </div>
+                    </div>
+
+                    <div class="mb-8">
+                        <h4 class="font-bold text-gray-600 mb-2">Bill To:</h4>
+                        <input type="text" placeholder="Your Name" class="border p-2 rounded w-full mb-2">
+                        <input type="text" placeholder="Your Company Name" class="border p-2 rounded w-full mb-2">
+                        <input type="text" placeholder="Your Address" class="border p-2 rounded w-full">
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left">
+                            <thead>
+                                <tr class="bg-amber-100 text-amber-800">
+                                    <th class="p-3 font-bold">Description</th>
+                                    <th class="p-3 font-bold text-center">Duration</th>
+                                    <th class="p-3 font-bold text-right">Amount (PKR)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b">
+                                    <td id="invoice-item-name" class="p-3">Select a plan above</td>
+                                    <td id="invoice-item-duration" class="p-3 text-center">-</td>
+                                    <td id="invoice-item-amount" class="p-3 text-right">0.00</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="flex justify-end mt-8">
+                        <div class="w-full md:w-1/3">
+                            <div class="flex justify-between text-gray-700">
+                                <span>Subtotal:</span>
+                                <span id="invoice-subtotal">Rs 0.00</span>
+                            </div>
+                            <div class="flex justify-between text-gray-700 mt-2">
+                                <span>Tax/GST (0%):</span>
+                                <span>Rs 0.00</span>
+                            </div>
+                            <hr class="my-2">
+                            <div class="flex justify-between font-bold text-xl text-amber-900">
+                                <span>Total Due:</span>
+                                <span id="invoice-total">Rs 0.00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Feature 1: Marketing Insights Generation -->
+            <section id="llm-insights" class="mb-12 max-w-4xl mx-auto">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold text-amber-900">Premium Strategy Preview ✨</h2>
+                    <p class="mt-2 text-amber-700">See the value of the Premium Plan! Enter your business context below and get instant, high-level marketing concepts powered by the Gemini AI.</p>
+                </div>
+                <div class="bg-white p-8 rounded-lg shadow-2xl">
+                    <h4 class="font-bold text-gray-600 mb-4">Your Business Context:</h4>
+                    <textarea id="business-context" rows="3" placeholder="E.g., 'We sell custom-made artisanal soaps online targeting environmentally conscious millennials.' (Max 200 characters)" maxlength="200" class="border p-3 rounded w-full mb-4 focus:ring-amber-500 focus:border-amber-500"></textarea>
+                    
+                    <button id="generate-button" onclick="generateInsights()" class="w-full bg-amber-900 text-white font-bold py-3 px-4 rounded-lg hover:bg-amber-800 transition-colors flex items-center justify-center disabled:opacity-50" disabled>
+                        <span id="button-text">Generate Marketing Insights ✨</span>
+                        <div id="loading-indicator" class="loading-spinner ml-3 hidden"></div>
+                    </button>
+
+                    <div id="insights-result" class="mt-8 p-4 bg-amber-50 border-l-4 border-amber-500 rounded text-gray-700 whitespace-pre-wrap">
+                        Insights will appear here after you enter your business context and click 'Generate Marketing Insights'.
+                    </div>
+                    <div id="error-message" class="mt-4 text-red-600 hidden"></div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script>
+        // Updated prices and currency to PKR
+        const plans = {
+            basic: {
+                name: 'Basic Campaign Activation & Strategy',
+                price: 20000,
+                duration: '2 Weeks',
+                currency: 'Rs ', // Pakistani Rupee symbol
+                tts: 'The Basic Plan costs 20,000 rupees for two weeks. This includes immediate ad campaign activation and the application of our core marketing strategy.'
+            },
+            premium: {
+                name: 'Premium Daily Optimization & Full Support',
+                price: 33000,
+                duration: '2 Weeks',
+                currency: 'Rs ', // Pakistani Rupee symbol
+                tts: 'The Premium Plan costs 33,000 rupees for two weeks. This includes daily creation of fresh ad creatives, continuous campaign renewal and optimization, meticulous audience targeting, ongoing strategic guidance, and full 24-hour service support.'
+            }
+        };
+
+        let selectedPlanKey = 'premium';
+        let currentAudio = null;
+
+        const apiKey = "";
+        const generationApiUrl = https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey};
+        const ttsApiUrl = https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key=${apiKey};
+
+        // --- Core Application Functions ---
+
+        function selectPlan(planKey) {
+            selectedPlanKey = planKey;
+            const selectedPlan = plans[planKey];
+            
+            document.getElementById('invoice-item-name').textContent = selectedPlan.name;
+            document.getElementById('invoice-item-duration').textContent = selectedPlan.duration;
+            
+            // Format price using 'en-PK' locale and custom 'Rs ' prefix
+            const formattedPrice = ${selectedPlan.currency}${selectedPlan.price.toLocaleString('en-PK')}.00;
+            document.getElementById('invoice-item-amount').textContent = formattedPrice;
+            document.getElementById('invoice-subtotal').textContent = formattedPrice;
+            document.getElementById('invoice-total').textContent = formattedPrice;
+
+            document.querySelectorAll('.plan-card').forEach(card => card.classList.remove('selected'));
+            document.getElementById(plan-${planKey}).classList.add('selected');
+            
+            // Reset TTS on plan change
+            const ttsButton = document.getElementById('tts-button');
+            const ttsButtonText = document.getElementById('tts-button-text');
+            ttsButton.disabled = false;
+            ttsButtonText.textContent = 'Listen to Plan Summary ✨';
+            const audioPlayer = document.getElementById('tts-audio');
+            if (currentAudio) {
+                currentAudio.pause();
+            }
+            audioPlayer.classList.add('hidden');
+        }
+
+        function setDates() {
+            const today = new Date();
+            const dueDate = new Date();
+            dueDate.setDate(today.getDate() + 14);
+
+            const formatDate = (date) => {
+                const day = String(date.getDate()).padStart(2, '0');
+                const month = String(date.getMonth() + 1).padStart(2, '0');
+                const year = date.getFullYear();
+                return ${day}/${month}/${year};
+            };
+
+            document.getElementById('invoice-date').textContent = formatDate(today);
+            document.getElementById('invoice-due-date').textContent = formatDate(dueDate);
+        }
+
+        function setupChart() {
+            const ctx = document.getElementById('priceChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Basic Plan', 'Premium Plan'],
+                    datasets: [{
+                        label: 'Price (PKR)',
+                        data: [plans.basic.price, plans.premium.price],
+                        backgroundColor: [
+                            'rgba(217, 119, 6, 0.7)',
+                            'rgba(120, 53, 15, 0.7)'
+                        ],
+                        borderColor: [
+                            'rgb(217, 119, 6)',
+                            'rgb(120, 53, 15)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value, index, values) {
+                                    // Use PKR formatting
+                                    return 'Rs ' + value.toLocaleString('en-PK');
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                             callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        // Use PKR formatting
+                                        label += 'Rs ' + context.parsed.y.toLocaleString('en-PK');
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        // --- Shared API & Utility Logic ---
+
+        function base64ToArrayBuffer(base64) {
+            const binaryString = atob(base64);
+            const len = binaryString.length;
+            const bytes = new Uint8Array(len);
+            for (let i = 0; i < len; i++) {
+                bytes[i] = binaryString.charCodeAt(i);
+            }
+            return bytes.buffer;
+        }
+
+        function writeString(view, offset, string) {
+            for (let i = 0; i < string.length; i++) {
+                view.setUint8(offset + i, string.charCodeAt(i));
+            }
+        }
+
+        function pcmToWav(pcm16, sampleRate = 24000) {
+            const numChannels = 1;
+            const bitsPerSample = 16;
+            const byteRate = sampleRate * numChannels * (bitsPerSample / 8);
+            const blockAlign = numChannels * (bitsPerSample / 8);
+            
+            const wavSize = pcm16.length * 2 + 44;
+            const buffer = new ArrayBuffer(wavSize);
+            const view = new DataView(buffer);
+            
+            writeString(view, 0, 'RIFF');
+            view.setUint32(4, wavSize - 8, true); 
+            writeString(view, 8, 'WAVE');
+            writeString(view, 12, 'fmt ');
+            view.setUint32(16, 16, true);
+            view.setUint16(20, 1, true);
+            view.setUint16(22, numChannels, true);
+            view.setUint32(24, sampleRate, true);
+            view.setUint32(28, byteRate, true);
+            view.setUint16(32, blockAlign, true);
+            view.setUint16(34, bitsPerSample, true);
+            writeString(view, 36, 'data');
+            view.setUint32(40, pcm16.length * 2, true); 
+
+            let offset = 44;
+            for (let i = 0; i < pcm16.length; i++) {
+                view.setInt16(offset, pcm16[i], true);
+                offset += 2;
+            }
+
+            return new Blob([view], { type: 'audio/wav' });
+        }
+        
+        const fetchWithRetry = async (url, options, retries = 3) => {
+            for (let i = 0; i < retries; i++) {
+                try {
+                    const response = await fetch(url, options);
+                    if (response.ok) return response;
+                    if (response.status === 429 && i < retries - 1) {
+                        const delay = Math.pow(2, i) * 1000;
+                        await new Promise(resolve => setTimeout(resolve, delay));
+                        continue;
+                    }
+                    throw new Error(API request failed with status ${response.status});
+                } catch (error) {
+                    if (i === retries - 1) throw error;
+                    const delay = Math.pow(2, i) * 1000;
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                }
+            }
+        };
+
+        // --- Feature 1: Marketing Insights Generation (Non-Grounded LLM) ---
+
+        async function generateInsights() {
+            const contextInput = document.getElementById('business-context');
+            const resultDiv = document.getElementById('insights-result');
+            const loadingIndicator = document.getElementById('loading-indicator');
+            const buttonText = document.getElementById('button-text');
+            const errorMessage = document.getElementById('error-message');
+            const context = contextInput.value.trim();
+
+            if (!context) {
+                resultDiv.textContent = 'Please enter a description of your business context to generate insights.';
+                return;
+            }
+            
+            // UI state management
+            loadingIndicator.classList.remove('hidden');
+            buttonText.textContent = 'Generating...';
+            document.getElementById('generate-button').disabled = true;
+            errorMessage.classList.add('hidden');
+            resultDiv.textContent = 'Analyzing context and generating strategic concepts...';
+
+            const systemPrompt = "You are an expert digital marketing strategist for a high-end agency. Based on the user's business context, generate a brief, powerful strategic marketing focus and three initial creative ad concepts. Format the output clearly using Markdown.";
+            
+            const userQuery = `We have selected the Premium Plan which includes daily ad creation, deep audience analysis, and continuous guidance. Our business context is: "${context}". Please provide:
+1.  *Strategic Focus:* A single paragraph summarizing the primary goal and target audience segment.
+2.  *Three Creative Ad Concepts:* For each concept, provide a compelling headline and a brief description of the visual/message theme.`;
+
+            const payload = {
+                contents: [{ parts: [{ text: userQuery }] }],
+                systemInstruction: {
+                    parts: [{ text: systemPrompt }]
+                },
+            };
+
+            try {
+                const response = await fetchWithRetry(generationApiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+                const text = result.candidates?.[0]?.content?.parts?.[0]?.text || "Error: Could not retrieve AI-generated insights. Please try again.";
+                
+                let htmlText = text
+                    .replace(/\\(.?)\\*/g, '<strong>$1</strong>') 
+                    .replace(/\n/g, '<br>');
+                
+                resultDiv.innerHTML = htmlText;
+
+            } catch (e) {
+                console.error("Gemini Generation API Error:", e);
+                errorMessage.textContent = 'Failed to connect to the marketing AI. Check your connection or try again later.';
+                errorMessage.classList.remove('hidden');
+                resultDiv.textContent = '';
+            } finally {
+                loadingIndicator.classList.add('hidden');
+                buttonText.textContent = 'Generate Marketing Insights ✨';
+                document.getElementById('generate-button').disabled = false;
+            }
+        }
+        
+        // Listener to enable the button when input is provided (for Feature 1)
+        document.getElementById('business-context').addEventListener('input', (e) => {
+            const button = document.getElementById('generate-button');
+            button.disabled = e.target.value.trim().length <= 10;
+        });
+
+
+        // --- Feature 2: TTS Plan Summary Generation ---
+        async function generateTts() {
+            const ttsButton = document.getElementById('tts-button');
+            const ttsButtonText = document.getElementById('tts-button-text');
+            const ttsLoading = document.getElementById('tts-loading');
+            const audioPlayer = document.getElementById('tts-audio');
+            const selectedPlan = plans[selectedPlanKey];
+
+            // Stop any current audio and hide the player
+            if (currentAudio) {
+                currentAudio.pause();
+                currentAudio = null;
+            }
+            audioPlayer.classList.add('hidden');
+            audioPlayer.src = '';
+            
+            // UI state management
+            ttsButton.disabled = true;
+            ttsLoading.classList.remove('hidden');
+            ttsButtonText.textContent = 'Loading Audio...';
+
+            // TTS text is now updated with PKR price
+            const ttsText = selectedPlan.tts; 
+            const systemPrompt = Read the following summary of the ${selectedPlan.name} plan for Sawaveer Marketing Agency in an informative, confident, and clear tone: ${ttsText};
+
+            const payload = {
+                contents: [{ parts: [{ text: systemPrompt }] }],
+                generationConfig: {
+                    responseModalities: ["AUDIO"],
+                    speechConfig: {
+                        voiceConfig: {
+                            prebuiltVoiceConfig: { voiceName: "Charon" } // Informative voice
+                        }
+                    }
+                },
+                model: "gemini-2.5-flash-preview-tts"
+            };
+
+            try {
+                const response = await fetchWithRetry(ttsApiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                
+                const result = await response.json();
+                const part = result.candidates?.[0]?.content?.parts?.[0];
+                const audioData = part?.inlineData?.data;
+                const mimeType = part?.inlineData?.mimeType;
+
+                if (audioData && mimeType && mimeType.startsWith("audio/")) {
+                    const pcmData = base64ToArrayBuffer(audioData);
+                    const pcm16 = new Int16Array(pcmData);
+                    
+                    const sampleRateMatch = mimeType.match(/rate=(\d+)/);
+                    const sampleRate = sampleRateMatch ? parseInt(sampleRateMatch[1], 10) : 24000;
+                    
+                    const wavBlob = pcmToWav(pcm16, sampleRate);
+                    const audioUrl = URL.createObjectURL(wavBlob);
+                    
+                    audioPlayer.src = audioUrl;
+                    audioPlayer.classList.remove('hidden');
+                    audioPlayer.play();
+                    currentAudio = audioPlayer;
+                    
+                    ttsButtonText.textContent = 'Playback Ready (Click to Play)';
+                } else {
+                    ttsButtonText.textContent = 'Audio Error';
+                    console.error("TTS API Error: Invalid audio data received.", result);
+                }
+            } catch (e) {
+                console.error("TTS API Call Failed:", e);
+                ttsButtonText.textContent = 'TTS API Failed';
+            } finally {
+                ttsLoading.classList.add('hidden');
+                ttsButton.disabled = false;
+            }
+        }
+        
+        // --- Feature 3: Grounded Marketing Term Explainer ---
+
+        async function explainTerm() {
+            const termInput = document.getElementById('term-input');
+            const resultDiv = document.getElementById('explainer-result');
+            const sourcesDiv = document.getElementById('explainer-sources');
+            const loadingIndicator = document.getElementById('explain-loading');
+            const buttonText = document.getElementById('explain-button-text');
+            const errorMessage = document.getElementById('explainer-error');
+            const term = termInput.value.trim();
+
+            if (!term) {
+                resultDiv.textContent = 'Please enter a marketing term.';
+                resultDiv.classList.remove('hidden');
+                sourcesDiv.classList.add('hidden');
+                return;
+            }
+
+            // UI State Management
+            loadingIndicator.classList.remove('hidden');
+            buttonText.textContent = 'Searching...';
+            document.getElementById('explain-button').disabled = true;
+            errorMessage.classList.add('hidden');
+            resultDiv.classList.remove('hidden');
+            sourcesDiv.classList.add('hidden');
+            resultDiv.innerHTML = <p class="text-amber-700">Finding the current definition for <strong>${term}</strong>...</p>;
+
+            const systemPrompt = "You are an expert marketing consultant. Provide a clear, concise, and professional definition for the requested marketing term, focusing on its practical application in digital campaigns.";
+            
+            const userQuery = Define and explain the marketing term: "${term}";
+
+            const payload = {
+                contents: [{ parts: [{ text: userQuery }] }],
+                // Use Google Search grounding to ensure accurate, up-to-date, and citable information
+                tools: [{ "google_search": {} }],
+                systemInstruction: {
+                    parts: [{ text: systemPrompt }]
+                },
+            };
+
+            try {
+                const response = await fetchWithRetry(generationApiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+                const candidate = result.candidates?.[0];
+                const text = candidate?.content?.parts?.[0]?.text || "Error: Could not retrieve a definition for this term. Please try a different query.";
+                
+                resultDiv.textContent = text;
+                
+                // Handle Citations
+                let sources = [];
+                const groundingMetadata = candidate?.groundingMetadata;
+                if (groundingMetadata && groundingMetadata.groundingAttributions) {
+                    sources = groundingMetadata.groundingAttributions
+                        .map(attribution => ({
+                            uri: attribution.web?.uri,
+                            title: attribution.web?.title,
+                        }))
+                        .filter(source => source.uri && source.title);
+                }
+
+                if (sources.length > 0) {
+                    sourcesDiv.classList.remove('hidden');
+                    const sourceHtml = sources.map((s, index) => 
+                        <a href="${s.uri}" target="_blank" class="citation-link">${s.title}</a>
+                    ).join(' | ');
+                    sourcesDiv.innerHTML = <strong>Sources:</strong> ${sourceHtml};
+                } else {
+                    sourcesDiv.classList.add('hidden');
+                }
+
+            } catch (e) {
+                console.error("Gemini Grounding API Error:", e);
+                errorMessage.textContent = 'Failed to connect to the knowledge base. Check your connection or try again later.';
+                errorMessage.classList.remove('hidden');
+                resultDiv.textContent = '';
+                sourcesDiv.classList.add('hidden');
+            } finally {
+                loadingIndicator.classList.add('hidden');
+                buttonText.textContent = 'Explain Term ✨';
+                document.getElementById('explain-button').disabled = false;
+            }
+        }
+
+
+        window.onload = () => {
+            setDates();
+            setupChart();
+            selectPlan('premium');
+        };
+    </script>
+</body>
+</html>
